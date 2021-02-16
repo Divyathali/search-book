@@ -3,16 +3,19 @@
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
         <title>TV shows</title>
         <style type="text/css" media="screen">
-                   
+            .row{
+                display:flex;
+            }  
+
             .card {
                 background-color: white;  
-                margin-left:30%; 
                 width:30%;
                 padding:10px;
                 border:1px solid green;
                 position:center; 
 
             }
+           
             #row2{
                 padding:30px;
             }
@@ -27,7 +30,11 @@
             #myInput7,
             #myInput8,
             #myInput9,
-            #myInput10 {
+            #myInput10,
+            #myInput11,
+            #myInput12,
+            #myInput13,
+            #myInput14 {
                 position:center;
                 background-position: 10px 10px;
                 background-repeat: no-repeat;
@@ -271,6 +278,88 @@
                     console.error('Error:', error);
                 });     
             }
+
+            function search3(){
+                    
+                    fetch('https://www.anapioficeandfire.com/api/houses')
+                    .then(res => res.json())
+                    .then(res => 
+                    {                 
+                        var x=document.getElementById('row2');
+                        var table=document.createElement('table');
+                        table.id="myTable";
+                        var arr=['NAME','REGION','WORDS','TITLES','SEATS','DIET OUT','ANCESTRAL WEAPONS'];
+                            for(var j=0;j<arr.length;j++)
+                            {
+                                var th=document.createElement('th');
+                                th.innerHTML= arr[j];
+                                table.append(th);
+                            }
+    
+                            var len=res.length;  
+    
+                            for(let i=0;i<len;i++)
+                            { 
+                                var tr=document.createElement('tr');
+    
+                                var ts=document.createElement('td');
+                                ts.innerHTML=res[i].name;
+                                tr.append(ts);
+                                
+                                var td=document.createElement('td');
+                                td.innerHTML=res[i].region;
+                                tr.append(td);
+                                
+                                var td1=document.createElement('td');
+                                td1.innerHTML=res[i].coatOfArms.words;
+                                tr.append(td1);
+                            
+                                var td2=document.createElement('td');
+                                var text='';
+                                if(res[i].titles.length==1){
+                                    text=res[i].titles[0];
+                                }
+                                else{
+                                    for(j=0;j<res[i].titles.length;j++){
+                                        text+=res[i].titles[j]+'\n';
+                                    }                                    
+                                }
+                                                     
+                                td2.innerHTML=text;
+                                tr.append(td2);
+                            
+                                var td3=document.createElement('td');
+                                var text='';
+                                if(res[i].seats.length==1){
+                                    text=res[i].seats[0];
+                                }
+                                else{
+                                    for(j=0;j<res[i].seats.length;j++){
+                                        text+=res[i].seats[j]+'\n';
+                                    }                                    
+                                }
+                                td3.innerHTML=text;          
+                                tr.append(td3);
+                                
+                                var td4=document.createElement('td');
+    
+                                td4.innerHTML=res[i].seats.diesOut;
+                                tr.append(td4);
+                                
+                                var td5=document.createElement('td');
+                                td5.innerHTML=res[i].ancestralWeapons[0];
+                                tr.append(td5);                            
+                                
+                                table.append(tr);         
+                            }
+                            x.append(table);
+                            
+                        })
+                    .catch((error) => {
+                        alert(error);
+                        console.error('Error:', error);
+                    });                
+                }
             
             function myFunction()
                 {
@@ -487,12 +576,89 @@
                     }       
                 }
             }
+            function myFunction11()
+            {
+                var input, filter, table1, trn, td, i, txtValue;
+                input = document.getElementById("myInput11");
+                filter = input.value;
+                table1 = document.getElementById("myTable");
+                trn = table1.getElementsByTagName("tr");
+                for (i = 0; i < trn.length; i++) {
+                    td = trn[i].getElementsByTagName("td")[0];
+                    if (td) {
+                    txtValue = td.textContent || td.innerText || td.innerHTML;
+                    if (txtValue.indexOf(filter) > -1) {
+                         trn[i].style.display = "";
+                    } else {
+                        trn[i].style.display = "none";
+                    }
+                    }       
+                }
+            }
+            function myFunction12()
+            {
+                var input, filter, table1, trn, td, i, txtValue;
+                input = document.getElementById("myInput12");
+                filter = input.value;
+                table1 = document.getElementById("myTable");
+                trn = table1.getElementsByTagName("tr");
+                for (i = 0; i < trn.length; i++) {
+                    td = trn[i].getElementsByTagName("td")[1];
+                    if (td) {
+                    txtValue = td.textContent || td.innerText || td.innerHTML;
+                    if (txtValue.indexOf(filter) > -1) {
+                         trn[i].style.display = "";
+                    } else {
+                        trn[i].style.display = "none";
+                    }
+                    }       
+                }
+            }
+            function myFunction13()
+            {
+                var input, filter, table1, trn, td, i, txtValue;
+                input = document.getElementById("myInput13");
+                filter = input.value;
+                table1 = document.getElementById("myTable");
+                trn = table1.getElementsByTagName("tr");
+                for (i = 0; i < trn.length; i++) {
+                    td = trn[i].getElementsByTagName("td")[3];
+                    if (td) {
+                    txtValue = td.textContent || td.innerText || td.innerHTML;
+                    if (txtValue.indexOf(filter) > -1) {
+                         trn[i].style.display = "";
+                    } else {
+                        trn[i].style.display = "none";
+                    }
+                    }       
+                }
+            }
+            function myFunction14()
+            {
+                var input, filter, table1, trn, td, i, txtValue;
+                input = document.getElementById("myInput14");
+                filter = input.value;
+                table1 = document.getElementById("myTable");
+                trn = table1.getElementsByTagName("tr");
+                for (i = 0; i < trn.length; i++) {
+                    td = trn[i].getElementsByTagName("td")[4];
+                    if (td) {
+                    txtValue = td.textContent || td.innerText || td.innerHTML;
+                    if (txtValue.indexOf(filter) > -1) {
+                         trn[i].style.display = "";
+                    } else {
+                        trn[i].style.display = "none";
+                    }
+                    }       
+                }
+            }
         </script>
     </head>    
     <body>
-              
+        <div class=row>            
             <div class="card">        
-                <button id="id1" onclick="search1()"> Click me before Search!</button>
+                <button id="id1" onclick="search1()"> Click me for Book Search!</button>
+                <h5><b>Note:-</b>Case Sensitive Search</h5>
                 <h3>Book based Search</h3>
                 <div>
                     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names" title="Type in a name" >
@@ -506,13 +672,15 @@
                 <div>
                     <input type="text" id="myInput3" onkeyup="myFunction3()" placeholder="Search for ISBN" title="Type in a name">
                 </div>
-                <h5><b>*</b>Refresh the page before Characters based Search</h5>                
+                <h5><b>*</b>Refresh the page before Characters/House based Search</h5>
+                
             </div>   
             
             <div class="card">
-                <button id="id1" onclick="search2()"> Click me before Search!</button>        
+                <button id="id1" onclick="search2()"> Click me for charecter Search!</button> 
+                <h5><b>Note:-</b>Case Sensitive Search</h5>       
                 <h3>Characters based Search</h3>
-                <h5>Note:<b>*</b>Its book based charecter list-nearly 4569 fictional charecters availble.you can't reload this page.it may take 2-4 min on full load.but you can search anytime in loading,it will be work. </h5>
+                <h5>Note: 9 book based charecter list- nearly 4569 <b>webapi</b>/fictional charecters availble.So it take 2-4 min on full load.but you can search anytime in loading,it will be work. </h5>
                 <div>
                     <input type="text" id="myInput4" onkeyup="myFunction4()" placeholder="Search for names" title="Type in a name" >
                 </div>
@@ -534,13 +702,32 @@
                 <div>
                     <input type="text" id="myInput10" onkeyup="myFunction10()" placeholder="Search for aliases" title="Type in a aliases">
                 </div>
+                <h5><b>*</b>Refresh the page before House/Book based Search</h5>
             </div> 
+
+            <div class="card">        
+                <button id="id1" onclick="search3()"> Click me for House Search!</button>
+                <h5><b>Note:-</b>Case Sensitive Search</h5>
+                <h3>House based Search</h3>
+                <div>
+                    <input type="text" id="myInput11" onkeyup="myFunction11()" placeholder="Search for names" title="Type in a name" >
+                </div>
+                <div>
+                    <input type="text" id="myInput12" onkeyup="myFunction12()" placeholder="Search for region" title="Type in a name">
+                </div>
+                <div>
+                    <input type="text" id="myInput13" onkeyup="myFunction13()" placeholder="Search for titles" title="Type in a name">
+                </div>
+                <div>
+                    <input type="text" id="myInput14" onkeyup="myFunction14()" placeholder="Search for seats" title="Type in a name">
+                </div>
+                <h5><b>*</b>Refresh the page before Book/charecter based Search</h5>
+                
+            </div>   
             <div id="row2">
 
             </div> 
-
-            <iframe id="iframe" width="100%" height="300" style="border:none;">
-            </iframe>
+        </div>
            
                 
     </body>
